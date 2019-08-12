@@ -1,4 +1,7 @@
 #!/bin/bash
+# vim-stream
+# https://github.com/MilesCranmer/vim-stream
+
 # The argument fixes were supplied by John Kugelman
 # https://stackoverflow.com/a/44745698/2689923
 vim_cmds=()
