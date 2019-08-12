@@ -14,4 +14,4 @@ Next, put "clean_detex.sh" and "vims" into your LaTeX folder. Run with:
 ./clean_detex.sh main.tex
 ```
 
-This will output a file called main.tex_detex.txt that is a text version of your LaTeX code.
+This will output a file called main.tex_detex.txt that is a text version of your LaTeX code. You can then copy that text into Microsoft Word or Grammarly.
