@@ -6,7 +6,7 @@ If you've ever used detex in an attempt to convert your LaTeX to a text file tha
 This bash script does some very simple text manipulations to convert your LaTeX into a more readable .txt file. 
 
 
-To use, first install [detex](https://ctan.org/pkg/detex?lang=en).
+To use, first install [detex](https://ctan.org/pkg/detex?lang=en) (you might already have it installed with your LaTeX - try running `detex` on the command line).
 
 Next, put "clean_detex.sh" and "vims" into your LaTeX folder. Run with:
 
