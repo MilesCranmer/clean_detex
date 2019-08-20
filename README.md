@@ -16,7 +16,7 @@ Next, put "clean_detex.sh" and "vims" into your LaTeX folder (the second part is
 
 This will output a file called main.tex_detex.txt that is a text version of your LaTeX code. You can then copy that text into Microsoft Word or Grammarly.
 
-Note that if you use `\input{}` statements, you will need to run `clean_detex` on each individual file (easier) or
+Note that if you use `\input{}` statements, you will need to run `clean_detex` on each individual file with the `-r` option (easier) or
 use [latexpand](https://gitlab.com/latexpand/latexpand) to copy them all into the same file (messier).
 
 
