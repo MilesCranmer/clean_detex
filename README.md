@@ -8,7 +8,7 @@ This bash script does some very simple text manipulations to convert your LaTeX 
 
 To use, first install [detex](https://ctan.org/pkg/detex?lang=en) (you might already have it installed with your LaTeX - try running `detex` on the command line).
 
-Next, put "clean_detex.sh" and "vims" into your LaTeX folder. Run with:
+Next, put "clean_detex.sh" and "vims" into your LaTeX folder (the second part is unnecessary if you have [vim-stream](https://github.com/MilesCranmer/git-stream) installed). Run with:
 
 ```
 ./clean_detex.sh main.tex
