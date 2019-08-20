@@ -28,7 +28,7 @@ echo "Backing up"
 cp $FILENAME /tmp/.$OUTPUTFILENAME.detex.tex
 
 echo 'Clearing \input{} statements'
-cat /tmp/.$OUTPUTFILENAME.detex.tex | $VIMS '%s/\\input{.*\{-}}//g' > /tmp/.$OUTPUTFILENAME.detex1.3.tex
+cat /tmp/.$OUTPUTFILENAME.detex.tex | $VIMS '%s/\\input{.\{-}}//g' > /tmp/.$OUTPUTFILENAME.detex1.3.tex
 
 if [ "$RAWTEX" -eq "0" ]; then
     echo "Clearing preamble"
