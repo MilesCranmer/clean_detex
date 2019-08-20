@@ -15,3 +15,16 @@ Next, put "clean_detex.sh" and "vims" into your LaTeX folder. Run with:
 ```
 
 This will output a file called main.tex_detex.txt that is a text version of your LaTeX code. You can then copy that text into Microsoft Word or Grammarly.
+
+
+## Options
+
+
+```
+./clean_detex.sh chapter1.tex -r -o output.txt
+```
+
+- The `-r` means raw TeX: it will treat the .tex file as pure LaTeX --- it doesn't need  a `\begin{document}`
+- The `-o output.tex` sets the output file, useful if you are batching over many chapters and want different names
+
+
