@@ -22,18 +22,15 @@ Next, put "clean_detex.sh" and "vims" into your LaTeX folder (the second part is
 
 This will output a file called main.txt that is a text version of your LaTeX code. You can then copy that text into MS Word or Grammarly.
 
-Note that if you use `\input{}` statements, you will need to run `clean_detex` on each individual file with the `-r` option (easier) or
-use [latexpand](https://gitlab.com/latexpand/latexpand) to copy them all into the same file (messier).
-
-
 ## Options
 
 
 ```
-./clean_detex.sh chapter1.tex -r -o output.txt
+./clean_detex.sh chapter1.tex -r -i -o output.txt
 ```
 
 - The `-r` means raw TeX: it will treat the .tex file as pure LaTeX --- it doesn't need  a `\begin{document}`
+- The `-i` means the TeX file for each `\input{}` statements will be imported into the .txt file (requires the `latexpand` package included in CTAN). Otherwise they get scraped
 - The `-o output.tex` sets the output file, useful if you are batching over many chapters and want different names
 
 

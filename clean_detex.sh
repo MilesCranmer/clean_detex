@@ -11,6 +11,7 @@ fi
 set -e
 FILENAME="$1"
 RAWTEX="0"
+INCLUDE="0"
 OUTPUTFILENAME="$1_detex.txt"
 
 shift
@@ -19,6 +20,7 @@ while (($# > 0)); do
     case "$1" in
         -r|--raw) RAWTEX="1";;
         -o|--output) OUTPUTFILENAME="$2" && shift;;
+        -i|--include) INCLUDE="1";;
         *) echo "Invalid command" && exit 1;;
     esac
     shift
@@ -27,8 +29,14 @@ done
 echo "Backing up"
 cp $FILENAME /tmp/.$OUTPUTFILENAME.detex.tex
 
-echo 'Clearing \input{} statements'
-cat /tmp/.$OUTPUTFILENAME.detex.tex | $VIMS '%s/\\input{.\{-}}//g' > /tmp/.$OUTPUTFILENAME.detex1.3.tex
+
+if [ "$INCLUDE" -eq "0" ]; then
+    echo 'Clearing \input{} statements'
+    cat /tmp/.$OUTPUTFILENAME.detex.tex | $VIMS '%s/\\input{.\{-}}//g' > /tmp/.$OUTPUTFILENAME.detex1.3.tex
+else
+    echo 'Importing \input{} statements'
+    latexpand /tmp/.$OUTPUTFILENAME.detex.tex -o /tmp/.$OUTPUTFILENAME.detex1.3.tex
+fi
 
 if [ "$RAWTEX" -eq "0" ]; then
     echo "Clearing preamble"
