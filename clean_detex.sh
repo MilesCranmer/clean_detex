@@ -27,11 +27,14 @@ done
 echo "Backing up"
 cp $FILENAME /tmp/.$OUTPUTFILENAME.detex.tex
 
+echo 'Clearing \input{} statements'
+cat /tmp/.$OUTPUTFILENAME.detex.tex | $VIMS '%s/\\input{.*\{-}}//g' > /tmp/.$OUTPUTFILENAME.detex1.3.tex
+
 if [ "$RAWTEX" -eq "0" ]; then
     echo "Clearing preamble"
-    cat /tmp/.$OUTPUTFILENAME.detex.tex | $VIMS '1,/\\begin{document}/d' '$,?\\end{document}?d' > /tmp/.$OUTPUTFILENAME.detex1.5.tex
+    cat /tmp/.$OUTPUTFILENAME.detex1.3.tex | $VIMS '1,/\\begin{document}/d' '$,?\\end{document}?d' > /tmp/.$OUTPUTFILENAME.detex1.5.tex
 else
-    cp /tmp/.$OUTPUTFILENAME.detex.tex /tmp/.$OUTPUTFILENAME.detex1.5.tex
+    cp /tmp/.$OUTPUTFILENAME.detex1.3.tex /tmp/.$OUTPUTFILENAME.detex1.5.tex
 fi
 
 echo "Moving figure captions to end of document"
