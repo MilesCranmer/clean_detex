@@ -3,7 +3,7 @@
 
 Workflow:
 - Run `clean_detex.sh` on your TeX files
-- Copy the plaintext versions into your favorite grammar/spell checker
+- Copy the plaintext versions into your favorite grammar/spell checker (e.g., [grammarly](https://grammarly.com))
 - Manually edit the original TeX files with the suggestions
 
 If you've ever used detex in an attempt to convert your LaTeX to a text file that you can use with a grammar checker, you know that the vast majority of the grammatical mistakes are because detex has removed things like equations and citations, which in compiled LaTeX take the place of words in a sentence.
