@@ -26,15 +26,19 @@ done
 
 echo "Backing up"
 cp $FILENAME /tmp/.$OUTPUTFILENAME.detex.tex
-echo "Converting inline tokens to X"
 
 if [ "$RAWTEX" -eq "0" ]; then
-    cat /tmp/.$OUTPUTFILENAME.detex.tex | $VIMS '1,/\\begin{document}/d' > /tmp/.$OUTPUTFILENAME.detex1.5.tex
+    echo "Clearing preamble"
+    cat /tmp/.$OUTPUTFILENAME.detex.tex | $VIMS '1,/\\begin{document}/d' '$,?\\end{document}?d' > /tmp/.$OUTPUTFILENAME.detex1.5.tex
 else
     cp /tmp/.$OUTPUTFILENAME.detex.tex /tmp/.$OUTPUTFILENAME.detex1.5.tex
 fi
 
-cat /tmp/.$OUTPUTFILENAME.detex1.5.tex | $VIMS '%s/\\begin{abstract}//g'  '%s/\\end{abstract}//g' '%s/\\\[.\{-}\\\]/X/g' '%s/\$.\{-}\$/X/g' | $VIMS '%s/\\cite{.\{-}}/X/g' '%s/\\citealt{.\{-}}/X/g' '%s/\\ref{.\{-}}/X/g' '%s/\\cref{.\{-}}/X/g' '%s/\\url{.\{-}}/X/g' | $VIMS '%s/\\label{.\{-}}//g' '%g/\\begin{align}/,/\\end{align}/d' '%g/\\begin{align\*}/,/\\end{align\*}/d' '%g/\\begin{equation}/,/\\end{equation}/d' '%g/\\begin{equation\*}/,/\\end{equation\*}/d' > /tmp/.$OUTPUTFILENAME.detex2.tex
+echo "Moving figure captions to end of document"
+cat /tmp/.$OUTPUTFILENAME.detex1.5.tex | $VIMS -e '\\caption{' '/caption{\<enter>f{lvi{dGo\<esc>pGo' > /tmp/.$OUTPUTFILENAME.captions.detex.tex
+
+echo "Converting inline tokens to X"
+cat /tmp/.$OUTPUTFILENAME.captions.detex.tex | $VIMS '%s/\\begin{abstract}//g'  '%s/\\end{abstract}//g' '%s/\\\[.\{-}\\\]/X/g' '%s/\$.\{-}\$/X/g' | $VIMS '%s/\\cite{.\{-}}/X/g' '%s/\\citealt{.\{-}}/X/g' '%s/\\ref{.\{-}}/X/g' '%s/\\cref{.\{-}}/X/g' '%s/\\url{.\{-}}/X/g' | $VIMS '%s/\\label{.\{-}}//g' '%g/\\begin{align}/,/\\end{align}/d' '%g/\\begin{align\*}/,/\\end{align\*}/d' '%g/\\begin{equation}/,/\\end{equation}/d' '%g/\\begin{equation\*}/,/\\end{equation\*}/d' > /tmp/.$OUTPUTFILENAME.detex2.tex
 
 
 
