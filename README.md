@@ -26,11 +26,12 @@ This will output a file called main.txt that is a text version of your LaTeX cod
 
 
 ```
-./clean_detex.sh chapter1.tex -r -i -o output.txt
+./clean_detex.sh chapter1.tex -r -i -o output.txt -f 'MDC' 'todo'
 ```
 
 - The `-r` means raw TeX: it will treat the .tex file as pure LaTeX --- it doesn't need  a `\begin{document}`
 - The `-i` means the TeX file for each `\input{}` statements will be imported into the .txt file (requires the `latexpand` package included in CTAN). Otherwise they get scraped
 - The `-o output.tex` sets the output file, useful if you are batching over many chapters and want different names
+- The `-f 'MDC' 'todo'` adds custom filters for `\MDC{...}` and `\todo{...}`. The text inside of these commands will be removed.
 
 
