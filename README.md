@@ -14,7 +14,7 @@ This bash script does some simple text manipulations to convert your LaTeX into 
 
 To use, first install [detex](https://ctan.org/pkg/detex?lang=en) (you might already have it installed with your LaTeX - try running `detex` on the command line).
 
-Next, put "clean_detex.sh" and "vims" into your LaTeX folder (the second part is unnecessary if you have [vim-stream](https://github.com/MilesCranmer/vim-stream) installed). Run with:
+Next, put "clean_detex.sh" into your LaTeX folder. Run with:
 
 ```
 ./clean_detex.sh main.tex -o main.txt
@@ -32,6 +32,6 @@ This will output a file called main.txt that is a text version of your LaTeX cod
 - The `-r` means raw TeX: it will treat the .tex file as pure LaTeX --- it doesn't need  a `\begin{document}`
 - The `-i` means the TeX file for each `\input{}` statements will be imported into the .txt file (requires the `latexpand` package included in CTAN). Otherwise they get scraped
 - The `-o output.tex` sets the output file, useful if you are batching over many chapters and want different names
-- The `-f 'MDC' 'todo'` adds custom filters for `\MDC{...}` and `\todo{...}`. The text inside of these commands will be removed.
+- The `-f 'MDC' 'todo'` adds custom filters for `\MDC{...}` and `\todo{...}`. These commands and their enclosed text will be removed.
 
 
