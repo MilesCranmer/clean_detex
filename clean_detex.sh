@@ -275,7 +275,7 @@ class Token:
         if simple_ty == self.type or comment_ty == self.type:
             out = self.val
         else: 
-            out = "\\" + self.val
+            out = "\\\\" + self.val
         return out
 
 
@@ -361,7 +361,7 @@ def tokenize(in_str):
         if "%" == cs.item:
             comment = cs.scan_comment_token()
             text.append(Token(comment_ty, comment))
-        elif "\\" != cs.item:
+        elif "\\\\" != cs.item:
             text.append(Token(simple_ty, cs.item))
             cs.next()
         else:
@@ -391,7 +391,7 @@ class Command_def:
         self.body = body_v
 
     def show(self):
-        out = "\\newcommand{\\%s}" % (self.name)
+        out = "\\\\newcommand{\\\\%s}" % (self.name)
         if 0 < self.numargs:
             out += "[%d]" % self.numargs
         out += "{%s}" % detokenize(self.body)
@@ -411,7 +411,7 @@ class Env_def:
         self.end = end_v
 
     def show(self):
-        out = "\\newenvironment{%s}" % self.name
+        out = "\\\\newenvironment{%s}" % self.name
         if 0 < self.numargs:
             out += "[%d]" % self.numargs
         out += "{%s}" % detokenize(self.begin)
@@ -428,7 +428,7 @@ class Command_instance:
         self.args = args_v
 
     def show(self):
-        out = "\\"+self.name
+        out = "\\\\"+self.name
         for arg in self.args:
             out += "{%s}" % detokenize(arg)
         return out
@@ -444,11 +444,11 @@ class Env_instance:
         self.body = body_v
 
     def show(self):
-        out = "\\begin{%s}" % self.name
+        out = "\\\\begin{%s}" % self.name
         for arg in self.args:
             out += "{%s}" % detokenize(arg)
         out += detokenize(self.body)
-        out += "\\end{%s}" % self.name
+        out += "\\\\end{%s}" % self.name
         return out
 
 class Char_stream(Stream):
@@ -508,7 +508,7 @@ class Char_stream(Stream):
             item = self.next()
         file = ""
         if not "{" == item:
-            raise SyntaxError("\\usepackage not followed by brace.")
+            raise SyntaxError("\\\\usepackage not followed by brace.")
         item = self.next()
         while self.uplegal() and not blank_or_rbrace_re.match(item):
             file += item
@@ -539,7 +539,7 @@ class Tex_stream(Stream):
             if "%" == cs.item:
                 comment = cs.scan_comment_token()
                 text.append(Token(comment_ty, comment))
-            elif "\\" != cs.item:
+            elif "\\\\" != cs.item:
                 text.append(Token(simple_ty, cs.item))
                 cs.next()
             else:
@@ -570,7 +570,7 @@ class Tex_stream(Stream):
                         del files[i:(i+1)]
                     if files: # non-private packages left
                         group_content = ",".join(files)
-                        to_add_str = "\\usepackage{%s}" % (group_content)
+                        to_add_str = "\\\\usepackage{%s}" % (group_content)
                         to_add = tokenize(to_add_str)
                         text.extend(to_add)
                 else:
@@ -1115,7 +1115,7 @@ class Tex_stream(Stream):
             ts.data = []
             ts.defs = self.defs
             ts.process_file(file)
-        to_add = "\\input{%s}" % (file)
+        to_add = "\\\\input{%s}" % (file)
         return tokenize(to_add)
 
 
